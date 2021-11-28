@@ -6,6 +6,7 @@ class Calculator(QWidget):
     def __init__(self):
         super(Calculator, self).__init__()
 
+        # Создание осей выравнивания
         self.vbox = QVBoxLayout(self)
         self.hbox_input = QHBoxLayout()
         self.hbox_first = QHBoxLayout()
@@ -22,7 +23,7 @@ class Calculator(QWidget):
         self.vbox.addLayout(self.hbox_result)
         self.input = QLineEdit(self)
         self.hbox_input.addWidget(self.input)
-
+        # Создание кнопок и привязка к осям выравнивания
         self.b_1 = QPushButton("1", self)
         self.hbox_first.addWidget(self.b_1)
 
@@ -59,6 +60,7 @@ class Calculator(QWidget):
         self.b_comm = QPushButton(".", self)
         self.hbox_therd.addWidget(self.b_comm)
 
+        # Создаем события, которые будут отвечать за результат нажатия по кнопкам
         self.b_result = QPushButton("=", self)
         self.hbox_result.addWidget(self.b_result)
         self.b_plus.clicked.connect(lambda: self._operation("+"))
@@ -76,17 +78,20 @@ class Calculator(QWidget):
         self.b_0.clicked.connect(lambda: self._button("0"))
         self.b_comm.clicked.connect(lambda: self._button("."))
 
+    # Создаем метод класса для обработки кнопок, отвечающих за ввод цифр в линию ввода текста
     def _button(self, param):
         line = self.input.text()
 
         self.input.setText(line + param)
 
+    # Создаем метод класса для обработки нажатия на кнопку математической операции
     def _operation(self, op):
         self.num_1 = float(self.input.text())
 
         self.op = op
         self.input.setText("")
 
+    # Создаем метод класса для обработки нажатия на кнопку результата
     def _result(self):
         self.num_2 = float(self.input.text())
         if self.op == "+":
